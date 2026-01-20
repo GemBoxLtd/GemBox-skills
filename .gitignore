@@ -1,0 +1,25 @@
+# Benchmark results folders.
+benchmark-results-*/
+*-bench/
+
+# C# build output.
+bin/
+obj/
+
+# Python caches & envs.
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.env
+
+# Cache.
+cache/
+
+# Misc.
+*.log
+.DS_Store
+
+# Compiled CS projects.
+test-at-*/
