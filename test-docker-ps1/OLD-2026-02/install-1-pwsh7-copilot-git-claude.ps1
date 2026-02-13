@@ -1,8 +1,8 @@
-# Minimal native installer for Copilot CLI + Portable Git (bash) + Claude Code
-# Works on Win10/Win11 x64 and Windows Server Core containers
-# Installs user-local to %LOCALAPPDATA%\cli-agents (no C:\ writes)
-# Persists PATH to Machine scope and refreshes current shell
-# Uses TLS 1.2 + GitHub “latest” APIs to avoid hard-coded versions
+# Minimal native installer for PowerShell 7 + Copilot CLI + Git (with git-bash) + Claude Code.
+# Works on Win10/Win11 x64 and Windows Server Core containers.
+# Installs user-local to %LOCALAPPDATA%\cli-agents.
+# Persists PATH to Machine scope.
+# Uses TLS 1.2 + GitHub “latest” APIs to avoid hard-coded versions.
 
 $ErrorActionPreference="Stop"
 $ProgressPreference="SilentlyContinue"
@@ -26,6 +26,13 @@ function AddPath($p){
   }
 }
 
+# --- Copilot doesn't know PowerShell 5.1, so install pwsh 7.4.6 ---
+# NOTE: Latest version that works is 7.4.6, as pwsh 7.4.7+ are incompatible with docker:
+# https://github.com/PowerShell/PowerShell/issues/25541
+Invoke-WebRequest https://github.com/PowerShell/PowerShell/releases/download/v7.4.6/PowerShell-7.4.6-win-x64.msi -OutFile $env:TEMP\pwsh7.msi
+msiexec /i $env:TEMP\pwsh7.msi /qn /norestart
+AddPath "C:\Program Files\PowerShell\7"
+
 # --- Copilot CLI (download zip, extract, add PATH) ---
 Invoke-WebRequest -UseBasicParsing https://github.com/github/copilot-cli/releases/latest/download/copilot-win32-x64.zip -OutFile $env:TEMP\cop.zip
 Expand-Archive -Force $env:TEMP\cop.zip $COP
@@ -45,7 +52,7 @@ $env:Path = [Environment]::GetEnvironmentVariable("Path","Machine") + ";" +
 bash --version
 
 # --- Claude Code installer + PATH ---
-irm https://claude.ai/install.ps1 | iex
+Invoke-RestMethod https://claude.ai/install.ps1 | Invoke-Expression
 $CLA="$env:USERPROFILE\.local\bin"
 AddPath $CLA
 claude --version

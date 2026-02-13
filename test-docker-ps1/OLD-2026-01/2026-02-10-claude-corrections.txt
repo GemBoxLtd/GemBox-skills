@@ -1,0 +1,11 @@
+Yesterday Claude Code created 2026-02-09-claude-native-install.ps1 and 2026-02-09-claude-win-10-native-install.dockerfile. I am not satisfied with it, it needs to be refactored:
+
+A. Above dockerfile includes build commands, already present in first native-install-copilot-claude.ps1 and 2026-02-09-claude-native-install.ps1. Instead, that dockerfile should have copied and executed first native-install-copilot-claude.ps1 and then 2026-02-09-claude-native-install.ps1.
+
+B. native-install-copilot-claude.ps1 shouln't be changed and it should install Copilot CLI, Portable Git, and Claude Code like it does now. After that 2026-02-09-claude-native-install.ps1 should have been executed and installed additional: .NET 10 SDK + nuget, GemBox.Bundle nuget package, and GemBox skill from https://www.gemboxsoftware.com/support/ai-coding. No duplicate installs from native-install-copilot-claude.ps1.
+
+C. Skill was installed only for Claude Code, not for Copilot CLI.
+
+D. 2026-02-09-claude-native-install.ps1 is too complex, long, and hard for people to maintain. It should be plain and simple as native-install-copilot-claude.ps1 and human-maintanable.
+
+So today make new dockerfile and ps1 file with prefix 2026-02-10-13-12. Task is completed when you verifay in the docker container (by building an image and running CLI inside container) that everything works with new dockerfile calling old and new ps1. Don't ask for permissions, just make it work.
