@@ -28,4 +28,4 @@ Once installed, your coding agent will use "gembox-skill" automatically when gen
 
 ## Skill testing
 
-To test the skill when modifying, there is the `docker` folder that creates an image with .NET 10.0, git, bash, powershell, Node, Copilot, Claude, Codex, and GemBox skill installed. When started, it mounts your local folder to the container. After you login to Copilot/Claude/Codex you can test how skill works or run [test-bash-benchmark](/test-bash-benchmark/). If you don't want to build the container yourself, check our premade [gembox-skill docker container](https://hub.docker.com/r/zsvedic/gembox-skill).
+To test the skill when modifying, there is the `docker` folder that creates an image with .NET 10.0, git, bash, powershell, Node, Copilot, Claude, Codex, and GemBox skill installed. When started, it mounts your local folder to the container. After you login to Copilot/Claude/Codex you can test how skill works or run [test-bash-benchmark](/test-bash-benchmark/). If you don't want to build the container yourself, check our premade [gembox-skill docker container](https://hub.docker.com/r/gembox/gembox-skill).

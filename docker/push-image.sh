@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker push zsvedic/gembox-skill:latest
+docker push gembox/gembox-skill:latest

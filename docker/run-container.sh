@@ -2,4 +2,4 @@
 docker run --platform linux/amd64 -it \
   -v "$(pwd)/local-mount":/gembox-skills/docker/local-mount \
   -w /gembox-skills/docker/local-mount \
-  zsvedic/gembox-skill:latest
+  gembox/gembox-skill:latest

@@ -110,7 +110,7 @@ No formatting complexity.
 
 ### `build-image.sh`
 
-* Builds Docker image with a fixed tag (e.g. `zsvedic/gembox-skill:latest`).
+* Builds Docker image with a fixed tag (e.g. `gembox/gembox-skill:latest`).
 
 ### `run-container.sh`
 
@@ -120,7 +120,7 @@ No formatting complexity.
 
 ### `push-image.sh`
 
-* Pushes tagged image to Docker Hub namespace `zsvedic`.
+* Pushes tagged image to Docker Hub namespace `gembox`.
 
 ---
 
