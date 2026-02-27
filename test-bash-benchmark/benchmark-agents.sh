@@ -4,11 +4,30 @@
 PROMPT="$1"
 N_RUNS="$2"
 BENCH_NAME="${3:-noname}"
+AGENTS_PARAM="${4:-}"
 
 [[ -z "$PROMPT" || -z "$N_RUNS" ]] && {
-  echo "Usage: $0 <prompt> <n_runs> [bench_name]"
+  echo "Usage: $0 <prompt> <n_runs> [bench_name] [agents]"
+  echo "  agents: comma-separated list (default: codex-cli,copilot-cli,claude-code)"
   exit 1
 }
+
+# Build agent list — use provided value or fall back to all three
+VALID_AGENTS=(codex-cli copilot-cli claude-code)
+
+if [[ -n "$AGENTS_PARAM" ]]; then
+  IFS=',' read -ra AGENTS <<< "$AGENTS_PARAM"
+else
+  AGENTS=("${VALID_AGENTS[@]}")
+fi
+
+# Validate each requested agent
+for agent in "${AGENTS[@]}"; do
+  if ! printf '%s\n' "${VALID_AGENTS[@]}" | grep -qx "$agent"; then
+    echo "Error: invalid agent '$agent'. Valid values: ${VALID_AGENTS[*]}"
+    exit 1
+  fi
+done
 
 JQ_FILTER='
 .. | objects |
@@ -116,7 +135,7 @@ run_agent() {
 echo "Running $N_RUNS run(s) per agent..."
 
 for ((run=1; run<=N_RUNS; run++)); do
-  for agent in codex-cli copilot-cli claude-code; do
+  for agent in "${AGENTS[@]}"; do
     run_agent "$agent" "$run" "$PROMPT" &
   done
   wait
@@ -126,7 +145,7 @@ done
 echo ""
 echo "=== SUMMARY ==="
 
-for agent in codex-cli copilot-cli claude-code; do
+for agent in "${AGENTS[@]}"; do
   total=0 n=0
   total_xlsx=0 total_comp=0 total_run=0 total_warn=0
 
