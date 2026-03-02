@@ -14,6 +14,6 @@ That C# code should:
 - After saving the .PPTX file, the program should read the generated file and confirm that all elements are there correctly (four slides with the expected content in each).
 - Print to the console whether the final validation succeeded or failed. In case of failures, print what is missing or wrong.
 After generating the code:
-- Build and execute the code, fix it if there are issues.
+- Build and execute the code, fix it if there are issues."
 
-./benchmark-agents.sh "$PROMPT" "$N_RUNS" "Email" "$AGENTS"
+./benchmark-agents.sh "$PROMPT" "$N_RUNS" "Presentation" "$AGENTS"
