@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 N_RUNS="${1:-1}"
+AGENTS="${2:-}"
 
 PROMPT="Generate C# code, together with project files for opening in VSCode, that uses GemBox.Spreadsheet 2026.2.100 and .NET 10. 
 That C# code should:
@@ -14,4 +15,4 @@ After generating the code:
 - Build and execute the code, fix it if there are issues.
 - Verify the generated XLSX file contains the chart by unzipping and inspecting (e.g. with unzip -l file.xlsx | grep -i 'xl/charts')."
 
-./benchmark-agents.sh "$PROMPT" "$N_RUNS" "PieChart" 
+./benchmark-agents.sh "$PROMPT" "$N_RUNS" "PieChart" "$AGENTS"
