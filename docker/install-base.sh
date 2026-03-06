@@ -15,7 +15,8 @@ apt-get update
 
 apt-get install -y --no-install-recommends \
   nodejs \
-  dotnet-sdk-10.0
+  dotnet-sdk-10.0 \
+  ripgrep
 
 dotnet tool install -g PowerShell
 
